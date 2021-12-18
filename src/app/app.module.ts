@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+// environmets
 import { environment } from 'src/environments/environment';
 
 // components
@@ -13,7 +16,6 @@ import { FooterComponent } from './footer/footer.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { listTodosReducer } from './list-todos/lists-todos.reducers';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({

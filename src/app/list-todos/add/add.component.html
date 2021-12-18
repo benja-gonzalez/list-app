@@ -1,4 +1,6 @@
 <header class="header">
     <h1>Por hacer</h1>
-    <input class="new-todo" [placeholder]="placeholderTodoInputAdd" autofocus>
+    <!-- Input crear lista -->
+    <input class="new-todo" (keyup.enter)="onAdd()"[formControl]="texto"
+        [placeholder]="placeholderTodoInputAdd" autofocus required>
 </header>
