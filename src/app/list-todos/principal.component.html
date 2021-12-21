@@ -2,7 +2,8 @@
     <!-- Add app -->
     <app-add></app-add>
     
-    <input id="toggle-all" class="toggle-all" type="checkbox">
+    <input id="toggle-all" class="toggle-all" type="checkbox" (click)="toggleAll();completado = !completado">
+
     <label for="toggle-all">Mark all as complete</label>
     
     <!-- This section should be hidden by default and shown when there are todos -->
@@ -13,4 +14,5 @@
 
     <!-- Footer app list-->
     <app-footer></app-footer>
+    
 </section>

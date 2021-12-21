@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { add, delet, update, toggle } from './lists-todo.actions';
+import { add, delet, update, toggle, toggleAll } from './lists-todo.actions';
 import { Todo } from "./models/lists-todos.models";
 
 const initialState: Todo[] = [
@@ -15,34 +15,26 @@ const _listsTodoReducer = createReducer(// regresar siempre un arreglo nuevo, y 
     on(toggle, (state, { id }) => {// toggle de la propiedad completado
         return state.map(
             el => {
-                if (el.id === id) {
-                    return {
-                        ...el,
-                        completado: !el.completado
-                    }
-                } else {
-                    return el; 
-                }
+                if (el.id === id) { return { ...el, completado: !el.completado } } else { return el; }
             }
-        )
+        );
     }),
     on(delet, (state,{id}) => [...state.filter(v => v.id !== id)] ),// borro el elemento del store
     on(update, (state, {texto,id}) => {// edito solo el texto del store 
         return state.map(
             el => {
-                if (el.id === id) {
-                    return {
-                        ...el,
-                        texto
-                    }
-                } else {
-                    return el;
-                }
+                if (el.id === id) { return { ...el, texto } } else { return el; }
             }
-        )   
+        );
+    }),
+    on(toggleAll, (state,{completado}) => {
+        return state.map(
+            el => { return { ...el, completado } }
+        );
     })
 );
 
-export const listTodosReducer = (state:Todo[] = initialState, action:Action): Todo[] => {
+export const listTodosReducer = (state:Todo[] = initialState, action:Action): Todo[] => 
+{
     return _listsTodoReducer(state,action);
 }

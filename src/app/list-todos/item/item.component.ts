@@ -40,17 +40,20 @@ export class ItemComponent implements OnInit {
 	// Cambia a modo de edicion
 	update = (): void => {
 		this.editando = true;
+		this.textoEditar.setValue(this.item.texto);
 		setTimeout(() => {
 			this.textInputEditar.nativeElement.select();
 		}, 1);
 	}
 	// Terminar la edicion
 	onCancelEdit = (): void => {
-		this.item.texto = this.textoEditar.value;
+		if(this.textoEditar.invalid){ return; }
+		if(this.textoEditar.value === this.item.texto){ return; }
 		this.editando = false;
-		this._updateTexto();
+		
+		this.item.texto = this.textoEditar.value;
 	}
 	// Despacha la accion de updatte al store
-	private _updateTexto = (): void => { this._store.dispatch(actions.update({texto: this.item.texto, id:this.item.id})); }
+	_updateTexto = (): void => { this.editando = false; this._store.dispatch(actions.update({texto: this.item.texto, id:this.item.id})); }
 	
 }

@@ -1,8 +1,12 @@
-<li [class.completed]="item.completado" [class.editing]="editando">
+<li [ngClass]="{'complete': item.completado === true}" 
+    [ngClass]="{'editing': editando === true }">
+
     <div class="view">
-        <input class="toggle" type="checkbox" [formControl]="checkCompletado" [checked]="item.completado">
+        <input class="toggle" type="checkbox" [formControl]="checkCompletado">
+        
         <label (dblclick)="update()">{{ item.texto }}</label>
+        
         <button (click)="delete()" type="buttton" class="destroy"></button>
     </div>
-    <input #input class="edit" type="text" [formControl]="textoEditar" (blur)="onCancelEdit()" >
+    <input #input class="edit" (keyup.enter)="_updateTexto()" type="text" [formControl]="textoEditar" (blur)="onCancelEdit()" >
 </li>

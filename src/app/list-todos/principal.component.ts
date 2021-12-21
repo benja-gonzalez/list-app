@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { ListTodos } from '../app.reducers';
+import * as actions from './lists-todo.actions';
 
 @Component({
   selector: 'app-principal',
@@ -6,10 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./principal.component.scss']
 })
 export class PrincipalComponent implements OnInit {
-
-  constructor() { }
+  completado: boolean = false;
+  constructor(
+    private _store: Store<ListTodos>
+  ) { 
+  }
 
   ngOnInit(): void {
   }
+
+  toggleAll = (): void => { this._store.dispatch(actions.toggleAll({completado: this.completado})) }
 
 }
